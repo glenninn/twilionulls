@@ -25,8 +25,15 @@ function processLine(line) {
         process.exit();
     }
     const msgStr =  JSON.stringify(message,null,1);
-     msg2 = msgStr.split('\n').map( L => L.trim() );
-    console.log(`Line: ${msg2.length}`)
+     msg2 = msgStr.split('\n').map( L => L.trim()
+     .replace("{","\"{\"")
+     .replace("}","\"}\"")
+     .replace("null","\"null\"")
+     .replace(",","")
+     .replace(":",",")
+     );
+
+    msg2.forEach( L => { console.log(L)})
     process.exit()
 }
 
